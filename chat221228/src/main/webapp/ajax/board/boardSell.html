@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script defer src="./board.js"></script>
+    <link rel="stylesheet" href="./board.css" />
+    <script type="text/javascript">
+      //전역변수 선언자리
+
+      function getBoardSold() {
+        //마진 버튼을 클릭했을 때 호출하는 함수임
+        console.log("getBoardSold");
+        //createRequest();비동기통신객체를 생성하기
+        xhrObject = createRequest2(); //비동기통신객체를 리턴값으로 받기
+        console.log(xhrObject);
+        const url = "./boardSellAction.html"; //집계된 보드 판매량 수치
+        xhrObject.open("GET", url, true); //true:async,false:sync-이럴거면 ajax필요없음
+        xhrObject.onreadystatechange = soldProcess;
+        xhrObject.send(null);
+      }
+      //요청에 대한 응답이 다운로드 되었을때
+      //서버로부터 전송된 값이 200번 일때
+      //호출되는 함수 - 콜백함수 -> 어떤 조건이 만족되면 시스템이 호출해주는 함수
+      function soldProcess() {
+        console.log("soldProcess호출=>" + xhrObject.readyState); // readyState서버로부터 응답 확인
+        if (xhrObject.readyState == 4) {
+          //상태값이 바뀔때마다 콜백함수 호출됨
+          if (xhrObject.status == 200) {
+            //응답이 정상처리됨
+            const newTotal = xhrObject.responseText; // 새로 받아온 값 => boardSellAction
+            console.log(newTotal);
+            const boardSoldEI = document.querySelector("#boardSold");
+            replaceText(boardSoldEI, newTotal);
+            //구매가
+            const costEI = document.querySelector("#cost");
+            let cost = getText(costEI);
+            //소비자가
+            const priceEI = document.querySelector("#price");
+            let price = getText(priceEI);
+            //보드 한 개당 마진금액 계산
+            let cashPerBoard = price - cost;
+            let cash = cashPerBoard * newTotal;
+            const cashEI = document.querySelector("#cash");
+            replaceText(cashEI, cash);
+            console.log("마진금액은 " + cash);
+          }
+        }
+      }
+    </script>
+  </head>
+  <!-- 생략하면 type은 text/javascript이다 -->
+  <script>
+    window.addEventListener("load", function (event) {
+      const btnMargin = document.querySelector("#btnMargin");
+      btnMargin.addEventListener("click", (event) => {
+        event.preventDefault(); //submit으로 인한 정송처리로 페이지가 새로고침 방지
+        getBoardSold();
+      });
+    });
+  </script>
+
+  <body>
+    <h2>보드 판매량</h2>
+    <table width="300px" height="80px">
+      <tr>
+        <th width="120px">보드 판매량</th>
+        <td width="180px"><span id="boardSold">10</span></td>
+      </tr>
+      <!-- 
+      소비자가-구매가=보드 한개당 마진 금액
+      한개당 마진 금액*판매량=마진금액계산
+      -->
+      <tr>
+        <th>구매가</th>
+        <td><span id="cost">100</span>원</td>
+      </tr>
+      <tr>
+        <th>소비자가</th>
+        <td><span id="price">120</span>원</td>
+      </tr>
+    </table>
+    <h2>마진금액 : <span id="cash">0</span>원</h2>
+    <button type="submit" id="btnMargin">마진은?</button>
+    <!--  button태그 사용시에 디폴트 타입이 submit이여서 폼 전송이 일어나게 되며
+    이럴경우 해당 페이지가 리프레쉬됨에따라 이상동작이 발생하므로 반드시
+    button태그로 click이벤트 처리시에는 주의할것 -->
+  </body>
+</html>
