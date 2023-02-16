@@ -1,6 +1,7 @@
 package com.day1;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,8 +28,12 @@ public class HelloServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req,HttpServletResponse res)
 	throws ServletException ,IOException
 	{
-			System.out.println("doGet호출성공");
+			//System.out.println("doGet호출성공");
 			logger.info("doGet호출성공");
+			res.setContentType("text/html;charset = UTF-8");
+			
+	PrintWriter out =res.getWriter();
+	out.print("<font size = 28px color=red>주의</font>");
 	}
 	@Override
 	public void doPost(HttpServletRequest req,HttpServletResponse res)
