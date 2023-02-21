@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mybatis.mapper.BoardMapper">	
-	<select id="getBoardList" parameterType="java.util.HashMap" resultType="map">
- 	SELECT 
-        bs.bm_no, bm. bm_title,bm.bm_writer,bs.bs_file
-        ,bm.bm_hit,bm.bm_group,bm.bm_pos,bm.bm_step
-    FROM 
-         board_master_t bm, board_sub_t bs
-	WHERE bm.bm_no=bs.bm_no(+)
-	ORDER BY bm.bm_group desc,bm.bm_step asc
-	</select>	  	
+<mapper namespace="com.mybatis.mapper.BoardMapper">
+	<select id="getBoardList" parameterType="java.util.HashMap"
+		resultType="map">
+		SELECT
+		bs.bm_no, bm.bm_title,bm.bm_writer,bs.bs_file
+		,bm.bm_hit,bm.bm_group,bm.bm_pos,bm.bm_step
+		FROM
+		board_master_t bm,
+		board_sub_t bs
+		WHERE bm.bm_no=bs.bm_no(+)
+		<if test='bn_no>0'>
+			AND bn_no =#{bn_no}
+		</if>
+		<if test='cb_search!=null and cb_search.equals("bm_title")'>
+			AND bn_title LIKE'%'||#{keyword}||'%'
+		</if>
+		<if test='cb_search!=null and cb_search.equals("bn_content")'>
+			AND bn_content LIKE'%'||#{keyword}||'%'
+		</if>
+		<if test='cb_search!=null and cb_search.equals("bn_writer")'>
+			AND bn_writer LIKE'%'||#{keyword}||'%'
+		</if>
+		ORDER BY bm.bm_group desc,bm.bm_step asc
+	</select>
+	<!--조회수는 0으로 하면 되고 날짜는 시스템 날짜정보로 등록함 bm_pos와bm_step은 원글이면 0,0으로 입력하고 댓글이면 
+		read.jsp에서 가진 값에 각각 1을 더한 값으로 결정된다 -->
+	<insert id="boardMInsert" parameterType="map">
+		INSERT INTO
+		board_master_t(bm_no,bm_title,bm_writer,bm_reg,bm_hit)
+		,bm_group,bm_pos,bm_step)
+		VALUES(seq_board_no.nextval,#{bm_title},#{bm_writer},to_char(sysdate,'YYYY-MM-DD')
+		,0,#{bm_group},#{bm_pos},#{bm_step})
+	</insert>
+	<!-- 첨부파일을 추가하는 경우에만 실행된다 없으면 해당 없음 글번호는 새글쓰기에서 결정된 값이 대입외어야 함, 새로 채번XXXXX -->
+	<insert id="boardSInsert" parameterType="map">
+		INSERT INTO
+		board_sub_t(bm_no,bs_sqp,bs_file,bs_size)
+		VALUES(#{bm_no},1,#{bs_file},#{bs_size})
+	</insert>
+	<!-- 내가 쓰는 댓글 뒤에 댓글이 존재하는 경우만 실행 조건절에 들어오는 그룹번호와 step은 상세보기 화면에서 가져온 값이 
+		대입되면 된다 -->
+	<update id="bmStepUpdate" parameterType="map">
+		UPDATE board_master_t
+		SET bm_step = bm_step+1
+		WHERE bm_group =#{bm_gruop}
+		AND bm_step
+		>#{bm_step}
+	</update>
 </mapper>
