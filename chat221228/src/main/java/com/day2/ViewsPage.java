@@ -27,6 +27,7 @@ public class ViewsPage extends HttpServlet {
 		RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/views/day2/" + path + ".jsp");
 		view.forward(req, resp);
 
+
 		logger.info(view);
 	}
 

@@ -161,3 +161,10 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+.env

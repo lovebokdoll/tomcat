@@ -27,6 +27,7 @@ public class MimeHtmlServlet extends HttpServlet {
 		out.print("<h2>안녕</h2>");
 	}else {
 		res.sendRedirect("./mimeHtmlResult.jsp");
+		//응답을 주는 코드 다시 요청할것을 전달한다. ./mimeHtmlResult.jsp 를 다시 전달해줌!!
 	}
 		}
 }
