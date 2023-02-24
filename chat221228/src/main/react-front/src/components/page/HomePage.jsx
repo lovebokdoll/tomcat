@@ -1,10 +1,14 @@
-import React from 'react'
+import React from "react";
+import Header from "../include/Header";
+import Bottom from "../include/Bottom";
 
 const HomePage = () => {
   return (
-    <div>
-      HomePage페이지
-    </div>
-  )
-}
-export default HomePage
+    <React.Fragment>
+      <Header />
+      <div>HomePage페이지</div>
+      <Bottom />
+    </React.Fragment>
+  );
+};
+export default HomePage;
