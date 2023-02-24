@@ -30,6 +30,7 @@ public class DeptLogic {
         rmap.put( "deptno", 30 );
         rmap.put( "dname", "총무부" );
         rmap.put( "loc", "대전 " );
+        deptList.add( rmap );
         return deptList;
     }
     
