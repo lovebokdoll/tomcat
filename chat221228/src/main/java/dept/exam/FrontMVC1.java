@@ -1,9 +1,10 @@
-package com.pojo.step1;
+package dept.exam;
 
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,12 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 // 개발자가 정의한 서블릿 - 표준서블릿이 아니다
 //doServise메소드는 요청처리에 대한 창구를 일원화 하기 위해 개발자가 정의한 메소드
 //따라서 request객체와 response객체를 톰캣서버로부터 주입받을 수 없다.
 //이 문제 해결을 위해서 메소드 파라미터 자리를 이용하여 doGet이나 doPost메소드에서 주입받은
 //request객체와 response객체를 넘겨받아서 사용하는 컨셉으로 클래스 구현함
 //@WebServlet("*.st1")
+@WebServlet("*.st2")
 public class FrontMVC1 extends HttpServlet {
     // 요청을 들어줄 수 있다
     // doGet,doPost
@@ -39,7 +42,7 @@ public class FrontMVC1 extends HttpServlet {
         logger.info( end );// 16출력
         command = command.substring( 0, end );// /dept/getDeptList
         logger.info( command );
-        String upmu[] = null;// upmu[0] =업무명|폴더명,upmu[1]=요청기능이름
+        String[] upmu = null;// upmu[0] =업무명|폴더명,upmu[1]=요청기능이름
         upmu = command.split( "/" );// dept, getDeptList
         
         for ( String imsi : upmu ) {
@@ -50,10 +53,9 @@ public class FrontMVC1 extends HttpServlet {
         // 아직 업무명이 결정되지 않음 => [0]번방에 들어감
         // 업무명이 Controller클래스의 접두어임!!
         DeptController deptController = null;
-        EmpController  empController  = null;
         req.setAttribute( "upmu", upmu );
         
-        if ( "dept".equals( upmu[0] ) ) {
+        if ( "dept.exam".equals( upmu[0] ) ) {
             // request객체는 저장소이다 -저장할 때 setAttribute사용,꺼내올 때 getAttribute사용
             //아래 코드는 request저장소에 upmu배열에 주소번지 원본을 저장하는 구문
             deptController = new DeptController();
@@ -67,10 +69,6 @@ public class FrontMVC1 extends HttpServlet {
             af = deptController.execute( req, res );
             // dept컨트롤러는 서블릿이 아니여서 req와 res를 주입받을 수 없다.
             // 왜냐면 httpServlet을 상속받지 않았으니까
-        }
-        else if ( "emp".equals( upmu[0] ) ) {
-            empController = new EmpController();
-            af = empController.execute( req, res );
         }
         
         // 페이지 이동처리를 공통코드로 만들기

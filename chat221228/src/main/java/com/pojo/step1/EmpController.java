@@ -6,10 +6,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EmpController implements Action {
-    Logger logger = Logger.getLogger(DeptController.class);
+	private static final Logger logger = LogManager.getLogger();
     @Override
     public ActionForward execute(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {

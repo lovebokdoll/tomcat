@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 //form전송시 클라이언트측의 요청을 서블릿이 듣는다
 //method="get"이면 doGet호출
 //post dopost호출
@@ -23,7 +24,7 @@ import org.apache.log4j.Logger;
 //이유는 spring 사용시 메이븐레포를 이용한 프로젝트 생성인 경우에 xml문서로 환경을 설정함
 //클래스 사이의 객체주입관계도 xml문서로 처리 가능함
 public class HelloServlet extends HttpServlet {
-	Logger logger = Logger.getLogger(HelloServlet.class);
+    private static final Logger logger = LogManager.getLogger();
 	@Override
 	public void doGet(HttpServletRequest req,HttpServletResponse res)
 	throws ServletException ,IOException

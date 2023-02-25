@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	id="WebApp_ID" version="4.0">
@@ -7,7 +7,7 @@
 	<context-param>
 		<!--여기에 등록된 정보는 서버가 줄을때 까지 쭉 지속된다 -->
 		<param-name>log4jConfigLocation</param-name>
-		<param-value>/WEB-INF/classes/log4.properties</param-value>
+		<param-value>/WEB-INF/bin/log42.xml</param-value>
 	</context-param>
 	<servlet>
 		<servlet-name>TestServlet</servlet-name>
@@ -33,33 +33,25 @@
 		<servlet-name>DeptServlet</servlet-name>
 		<url-pattern>/jEasyUI/dept/insertAction.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>FrontController1</servlet-name>
 		<servlet-class>com.pojo.step1.FrontMVC1</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FrontController1</servlet-name>
+		<!-- *.st1하면 어떤 요청이름이 오든 확장자가 st1으로 끝나면 FrontMVC1 서블릿이인터셉트 한다. -->
 		<url-pattern>*.st1</url-pattern>
-		<!--*.st1=> 어떤 요청 이름이 오던, 확장자가 st1으로 끝나면 FrontController1이라는 클래스가 인터셉트! -->
 	</servlet-mapping>
-	
+
 </web-app>
 <!-- Deployeement Descriptor 배치서술자 spring maven-빌드 -> pom.xml파일 등록 web.xml문서를 
 	수정하면 반드시 서버를 내렸다가 다시 가동할것. 주의 -->
-	<!-- 톰캣서버를 기동하면 가장 먼저 읽는다
-			이 문서를 읽으면 st1확장자에 대해 알고 있다.
-			st1으로 들어오는 모든 요청은 FrontMVC1.java가 인터셉트 한다
-			이 요청은 브라우저의 주소창에 하게 되고 이 요청의 url을 읽어서 uomu배열에 담는다
-			dept/getDeptList - select처리 -화면유지 -forward페이지 이동 ->조회결과는 requrest에 담음
-			dept/getInsert - insert처리 -화면유지필요없음 -res.sendRedirect()->path담음
-			dept/getUpdate - update처리 -화면유지-res.sendRedirect() ->path()담음
-			dept/getDelete - update처리 -화면유지-res.sendRedirect() ->path담음
-			path관리하는 클래스명은 ActionForward.java이다.
-			이 클래스에는 전변이 2개 
-			1.path(페이지 이름)
-			2.isRedirect
-			true :res.sendRedirect
-			false:RequestDospatcher view = req.getRequestDispatcher()
-			view.forward(req,res)
-			위 내용에 대한 설정은 어디서 했나? FrontMVC1에서 했음 -->
+<!-- 톰캣서버를 기동하면 가장 먼저 읽는다 이 문서를 읽으면 st1확장자에 대해 알고 있다. st1으로 들어오는 모든 요청은 FrontMVC1.java가 
+	인터셉트 한다 이 요청은 브라우저의 주소창에 하게 되고 이 요청의 url을 읽어서 uomu배열에 담는다 dept/getDeptList 
+	- select처리 -화면유지 -forward페이지 이동 ->조회결과는 requrest에 담음 dept/getInsert - insert처리 
+	-화면유지필요없음 -res.sendRedirect()->path담음 dept/getUpdate - update처리 -화면유지-res.sendRedirect() 
+	->path()담음 dept/getDelete - update처리 -화면유지-res.sendRedirect() ->path담음 path관리하는 
+	클래스명은 ActionForward.java이다. 이 클래스에는 전변이 2개 1.path(페이지 이름) 2.isRedirect true 
+	:res.sendRedirect false:RequestDospatcher view = req.getRequestDispatcher() 
+	view.forward(req,res) 위 내용에 대한 설정은 어디서 했나? FrontMVC1에서 했음 -->

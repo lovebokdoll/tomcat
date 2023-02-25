@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 //http://localhost:9000/day2/a로 요청을 하면 RequestScope 서블릿 클래스의 doGet메소드가 호출되고
 //doGet메소드 안에서 27번의 sendRedirect대신에
@@ -27,7 +28,7 @@ public class RequestScope extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Logger logger = Logger.getLogger(RequestScope.class);
+	private static final Logger logger = LogManager.getLogger();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

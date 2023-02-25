@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 /*
  * 자바로는 웹서비스가 불가하다. -> request response가 없어서 안됨
@@ -29,7 +31,7 @@ import org.apache.log4j.Logger;
  * out.print("<b></b>")
  */
 public class DeptManager extends HttpServlet {
-    Logger logger = Logger.getLogger( DeptManager.class );
+    private static final Logger logger = LogManager.getLogger();
     
     @Override
     public void doGet( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {

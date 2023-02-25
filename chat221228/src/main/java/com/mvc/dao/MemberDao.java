@@ -5,14 +5,15 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.util.MyBatisCommonFactory;
 
 public class MemberDao {
 	// log4j모듈을 활용해서 로그 출력 - 날짜 시간 클래스명 라인번호 링크
 	// sysout 으로 출력하는것 보다 더 다양한 정보 얻을 수 있음 -> 그래서 객체 생성하는것임
-	Logger logger = Logger.getLogger(MemberDao.class);
+	private static final Logger logger = LogManager.getLogger();
 	// MyBatisCommonFactory는 다오 클래스롸 오라클 서버 사이에 MyBatis Layer에 필요한 설정 내용을 담은 공통코드
 	// 이 파일에서는 member.xml의 물리적인 위치와 오라클서버의 정보가 담긴 MyBatisConfig.xml의 정보를 IO로 읽어오는
 	// 코드가 포함됨

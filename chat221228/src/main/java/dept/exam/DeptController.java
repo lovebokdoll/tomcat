@@ -1,4 +1,5 @@
-package com.pojo.step1;
+package dept.exam;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class DeptController implements Action {
         
         // 너 부서목록 조회할거니 ?
         if ( "getDeptList".equals( upmu[1] ) ) {
-            List<Map<String, Object>> deptList = deptLogic.getDeptList();
+           String deptList = deptLogic.getDeptList();
             req.setAttribute( "deptList", deptList );
             //응답페이지 이름을 결정
             path = "getDeptList.jsp";
@@ -45,7 +46,8 @@ public class DeptController implements Action {
         }
         else if ( "deptInsert".equals( upmu[1] ) ) {
             // INSERT INTO SCOTT.DEPT (DEPTNO,DNAME,LOC) VALUES(?,?,?)
-            int result = deptLogic.deptInsert();
+        	
+           // int result = deptLogic.deptInsert(deptVO);
         }
         // 너 부서정보 수정해야돼 ?
         else if ( "deptUpdate".equals( upmu[1] ) ) {

@@ -9,12 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @WebServlet("/day2/b")
 public class ViewsPage extends HttpServlet {
 
-	Logger logger = Logger.getLogger(ViewsPage.class);
+	private static final Logger logger = LogManager.getLogger();
 
 	private static final long serialVersionUID = 1L;
 

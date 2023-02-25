@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 // GenericServlet(service()) <- HttpServlet (doGet,doPost)
 // WebServlet 어노테이션이 있는 서블릿은 컨트롤 계층을 담당한다.
@@ -16,7 +17,7 @@ import org.apache.log4j.Logger;
 @WebServlet("/lifecycle") // spring @Controller[컨트롤계층] + @ RequestMapping[URL 패턴정의]
 public class LifeCycleServlet extends HttpServlet {
 
-	Logger logger = Logger.getLogger(LifeCycleServlet.class);
+    private static final Logger logger = LogManager.getLogger();
 	private static final long serialVersionUID = 1L;
 
 	@Override

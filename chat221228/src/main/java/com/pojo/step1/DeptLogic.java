@@ -5,13 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.google.gson.Gson;
 
 // 트랜잭션 처리
 public class DeptLogic {
-    Logger logger = Logger.getLogger( DeptLogic.class );
+	private static final Logger logger = LogManager.getLogger();
     
     public List<Map<String, Object>> getDeptList() {
         logger.info( "getDeptList호출 " );
@@ -32,6 +33,21 @@ public class DeptLogic {
         rmap.put( "loc", "대전 " );
         deptList.add( rmap );
         return deptList;
+    }
+    
+    public int deptInsert() {
+    	logger.info( "deptInsert호출 " );
+    	return 0;
+    }
+    
+    public int deptUpdate() {
+    	logger.info( "deptUpdate호출 " );
+    	return 0;
+    }
+    
+    public int deptDelete() {
+    	logger.info( "deptUpdate호출 " );
+    	return 0;
     }
     
     public String jsonDeptList() {
@@ -56,19 +72,5 @@ public class DeptLogic {
         return temp;// JSOM포맷으로 전달 -리액트에서 조회시에 사용함
     }
     
-    public int deptInsert() {
-        logger.info( "deptInsert호출 " );
-        return 0;
-    }
-    
-    public int deptUpdate() {
-        logger.info( "deptUpdate호출 " );
-        return 0;
-    }
-    
-    public int deptDelete() {
-        logger.info( "deptUpdate호출 " );
-        return 0;
-    }
     
 }
