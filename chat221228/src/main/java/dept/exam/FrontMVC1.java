@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 //이 문제 해결을 위해서 메소드 파라미터 자리를 이용하여 doGet이나 doPost메소드에서 주입받은
 //request객체와 response객체를 넘겨받아서 사용하는 컨셉으로 클래스 구현함
 //@WebServlet("*.st1")
-@WebServlet("*.st2")
+//@WebServlet("*.st2")
 public class FrontMVC1 extends HttpServlet {
     // 요청을 들어줄 수 있다
     // doGet,doPost

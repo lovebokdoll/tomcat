@@ -90,7 +90,7 @@ public class FrontMVC1 extends HttpServlet {
         
     }
     
-    @Override
+    @Override 
     protected void doGet( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
         logger.info( "doGet호출" );// 주소창을 통해 호출하는건 모두 get방식이다. -doGet메소드 호출
         doServiece( req, res );

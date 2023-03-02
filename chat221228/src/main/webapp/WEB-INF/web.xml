@@ -43,8 +43,20 @@
 		<!-- *.st1하면 어떤 요청이름이 오든 확장자가 st1으로 끝나면 FrontMVC1 서블릿이인터셉트 한다. -->
 		<url-pattern>*.st1</url-pattern>
 	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>FrontController2</servlet-name>
+		<servlet-class>com.pojo.step2.ActionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FrontController2</servlet-name>
+		<!-- *.st1하면 어떤 요청이름이 오든 확장자가 st1으로 끝나면 FrontMVC1 서블릿이인터셉트 한다. -->
+		<url-pattern>*.st2</url-pattern>
+	</servlet-mapping>
 
 </web-app>
+<!-- context-param과 init-param차이 context-param은 서버가 기동될 때 한 번 읽으면 서버가 종료될 
+	때 까지 계속 기억하고 있음 init-param은 서블릿이 요청될 때마다 새로 읽는다 -->
 <!-- Deployeement Descriptor 배치서술자 spring maven-빌드 -> pom.xml파일 등록 web.xml문서를 
 	수정하면 반드시 서버를 내렸다가 다시 가동할것. 주의 -->
 <!-- 톰캣서버를 기동하면 가장 먼저 읽는다 이 문서를 읽으면 st1확장자에 대해 알고 있다. st1으로 들어오는 모든 요청은 FrontMVC1.java가 

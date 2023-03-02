@@ -16,7 +16,7 @@ public class DeptController implements Action {
     //Action implements했으니까 서블릿이 아님 => 메소드 나눌 수 없음..
     //Action implements,추상메소드 이름이 execute인 메소드를 override했다 => 그래서 서블릿이 아닌데도 req와 res사용할 수 있음
     // 서블릿이 아니니까 doGet,doPost사용 할 수 없음
-    //사용자가 정의한 메소드는 req와 res주입받을 수 없다ß
+    //사용자가 정의한 메소드는 req와 res주입받을 수 없다
     @Override
     public ActionForward execute( HttpServletRequest req, HttpServletResponse res )
                     throws ServletException, IOException {
