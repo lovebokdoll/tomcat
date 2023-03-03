@@ -1,4 +1,4 @@
-package com.pojo.step2;
+package com.pojo.step3;
 
 import java.io.IOException;
 
@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pojo.step2.Board2Controller;
+
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-public class ActionServlet extends HttpServlet {
+public class ActionSupport extends HttpServlet {
     /**
      * 
      */
@@ -34,13 +36,18 @@ public class ActionServlet extends HttpServlet {
         upmu = command.split( "/" );
         log.info( upmu[0] + "," + upmu[1] );
         req.setAttribute( "upmu", upmu );
-        Board2Controller boardColtroller = new Board2Controller();
-        Object           obj             = "";
-        obj =boardColtroller.execute( req, res );
-        //forward:board2/boardList
-        //  redirect/boardList.jsp
+        Object obj = "";
+        
+        try {
+            obj = HandlerMapping.getController( upmu, req, res );
+        }
+        catch ( Exception e ) {
+            log.error( "{}", e );
+        }
+        
         if ( obj != null ) {
-            String pageMove[] = null;
+            String       pageMove[] = null;
+            ModelAndView mav        = null;
             
             if ( obj instanceof String ) {
                 
@@ -54,11 +61,15 @@ public class ActionServlet extends HttpServlet {
                 }
                 log.info( pageMove[0] + ", " + pageMove[1] );
             }
-                //[0]forward  [1]board2/boardList
+            else if ( obj instanceof ModelAndView ) {
+                mav = ( ModelAndView ) obj;
+                pageMove = new String[2];
+                pageMove[0] = "forward";
+                pageMove[1] = mav.getViewName();
+                
+            }
             
             if ( pageMove != null ) {
-                // pageMove[0]=redirect,forward
-                // pageMove[1]= xx.jsp
                 String path = pageMove[1];
                 
                 if ( "redirect".equals( pageMove[0] ) ) {

@@ -26,10 +26,10 @@ public class Board2Dao {
             sqlSessionFactory = mcf.getSqlSessionFactory();
             sqlSession = sqlSessionFactory.openSession();
             Map<String, Object> pMap = new HashMap<>();
-            pMap.put( "mem_id", "tomato" );
-            pMap.put( "mem_pw", "123" );
+//            pMap.put( "mem_id", "tomato" );
+//            pMap.put( "mem_pw", "123" );
             bList = sqlSession.selectList( "boardList", pMap );
-            log.info( bList );// 3건 조회;
+            log.info( bList );
         }
         catch ( Exception e ) {
             e.printStackTrace();

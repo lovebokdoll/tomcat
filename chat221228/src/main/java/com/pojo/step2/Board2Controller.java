@@ -15,7 +15,7 @@ public class Board2Controller implements Controller {
     Board2Logic boardLogic = new Board2Logic();
     
     @Override
-    public String execute( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+    public  String execute( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
         log.info( "execute호출" );
         String[] upmu = ( String[] ) req.getAttribute( "upmu" );
         String   page = null;
@@ -26,6 +26,8 @@ public class Board2Controller implements Controller {
             boardList = boardLogic.boardList();
             req.setAttribute( "boardList", boardList );
             page = "forward:board2/boardList"; // -> /board2/boardList.jsp
+        } else if("boardInsert".equals(upmu[1])) {
+            page = "redirect/boardList.jsp";
         }
         return page;
     }
