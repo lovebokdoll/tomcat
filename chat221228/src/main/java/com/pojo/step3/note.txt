@@ -1,0 +1,38 @@
+게시판 구현을 위한 MVC패턴설계
+
+1.리액트를 고려한 설계인가?
+
+2.JSON포맷을 지원하는 메소드가 추가되었나?
+
+3.파일 업로드와 관련된 공통 코드나 라이브러리 선택이 되었나?
+
+4.유지보수에 편리하게 설계되었나?
+
+5.MyBatis와 같은 ORM솔루션들이 바뀌더라도 전체 설계 틀이 변하지 않도록 
+	다시말해 부분적 조립이 가능한 설계인가?
+	
+6.UI솔루션이 변경되더라도 클래스 설계에 영향이 가지 않도록 설계가 되었나?
+
+7. 클라이언트에서 서버로 전송해야 할 경우 여러가지 방법이 있다.
+
+ 1)form전송 - restful API
+ 2)ajax -> XXX.st3?bm_no=5&bm_title=제목..
+ 3)location.href = "xxx.jsp?bm_no=5"
+ 4)axios - 비동기처리 - 모듈화 - NodeJS기반  - import 브라우저
+ 5)fetch - 비동기처리
+
+boardList.jsp ->새글쓰기 -> 글번호 채번, 그룹번호 채번
+
+boardDetail.jsp -> 댓글쓰기(1건 조회된 상태)
+글번호만 채번이고 그룹번호는 그대로 사용
+
+글번호 : 채번
+글제목
+글내용
+작성자
+비번
+첨부파일 - 배제
+
+boardInsert(req,res):String   jsp - action - action - jsp
+boardInsert(Map):int
+boardInsert(Map):int

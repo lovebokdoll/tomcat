@@ -53,15 +53,16 @@
 		<!-- *.st1하면 어떤 요청이름이 오든 확장자가 st1으로 끝나면 FrontMVC1 서블릿이인터셉트 한다. -->
 		<url-pattern>*.st2</url-pattern>
 	</servlet-mapping>
-		<servlet>
+	
+		<!-- <servlet>
 		<servlet-name>FrontController3</servlet-name>
 		<servlet-class>com.pojo.step3.ActionSupport</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FrontController3</servlet-name>
-		<!-- *.st1하면 어떤 요청이름이 오든 확장자가 st1으로 끝나면 FrontMVC1 서블릿이인터셉트 한다. -->
+		*.st1하면 어떤 요청이름이 오든 확장자가 st1으로 끝나면 FrontMVC1 서블릿이인터셉트 한다.
 		<url-pattern>*.st3</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 
 </web-app>
 <!-- context-param과 init-param차이 context-param은 서버가 기동될 때 한 번 읽으면 서버가 종료될 

@@ -16,9 +16,9 @@ import lombok.extern.log4j.Log4j2;
  */
 @Log4j2
 public class ModelAndView {
-    HttpServletRequest req = null;
+    HttpServletRequest req ;
     // 캡슐화 코드는 반드시 getter와 setter가 필요하다 ->Lombok
-    private String            viewName = null;
+    private String            viewName ;
     List<Map<String, Object>> reqList  = new ArrayList<>();
     
     public ModelAndView() {}
@@ -28,7 +28,9 @@ public class ModelAndView {
     }
     
     public void addObject( String name, Object obj ) {
+        
         req.setAttribute( name, obj );
+       
         Map<String, Object> pMap = new HashMap<>();
         pMap.put( name, obj );
         reqList.add( pMap );
