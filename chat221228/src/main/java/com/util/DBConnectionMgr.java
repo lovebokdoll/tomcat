@@ -16,9 +16,7 @@ public class DBConnectionMgr {
   public static String _USER = "bokdoll";
   public static String _PW = "tiger";
 
-  public DBConnectionMgr() {
-
-  }
+  public DBConnectionMgr() {}
 
   public DBConnectionMgr(String ID, String PW) {
     // static으로 선언된 변수는 this나 super같은 예약어 사용이 불가하다.
