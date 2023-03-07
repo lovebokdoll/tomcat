@@ -46,4 +46,16 @@ public class Board3Logic {
         return result;
     }
     
+    public int boardMUpdate( Map<String, Object> pMap ) {
+        int result = board3Dao.boardMUpdate( pMap );
+        
+        return result;
+        
+    }
+    public int boardMDelete( Map<String, Object> pMap ) {
+        int result = board3Dao.boardMDelete( pMap );
+        return result;
+        
+    }
+    
 }

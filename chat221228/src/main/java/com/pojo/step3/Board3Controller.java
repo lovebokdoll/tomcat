@@ -16,6 +16,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class Board3Controller implements Controller3 {
     Board3Logic board3Logic = new Board3Logic();
+    String      path;
     
     @Override
     public ModelAndView boardList( HttpServletRequest req, HttpServletResponse res ) {
@@ -27,7 +28,9 @@ public class Board3Controller implements Controller3 {
         Map<String, Object> pMap = new HashMap<>();
         HashMapBinder       hmb  = new HashMapBinder( req );
         hmb.bind( pMap );
+        
         boardList = board3Logic.boardList( pMap );
+        
         ModelAndView mav = new ModelAndView( req );
         log.info( boardList );
         mav.setViewName( "board3/boardList" );
@@ -50,11 +53,11 @@ public class Board3Controller implements Controller3 {
         log.info( "boardDetail호출" );
         List<Map<String, Object>> bList = null;
         // 전체 조회에 대한 sql문 재사용가능함 - 1건조회
-        Map<String, Object> pMap   = new HashMap<>();
-        HashMapBinder       hmb    = new HashMapBinder( req );
+        Map<String, Object> pMap = new HashMap<>();
+        HashMapBinder       hmb  = new HashMapBinder( req );
         hmb.bind( pMap );
         bList = board3Logic.boardList( pMap );
-        log.info("bList");
+        log.info( "bList" );
         req.setAttribute( "bList", bList );
         return "forward:board3/boardDetail";
     }
@@ -72,12 +75,15 @@ public class Board3Controller implements Controller3 {
     @Override
     public Object boardInsert( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
         log.info( "boardInsert호출" );
-        int                 result = 0;
-        Map<String, Object> pMap   = new HashMap<>();
-        HashMapBinder       hmb    = new HashMapBinder( req );
+        int result = 0;
+        // 폼태그 안에 사용자가 입력한 정보(bm_writer,bm_title...)를 받아온다.
+        // req.getPatemeter("bm_writer")
+        // req.getPatemeter("bm_title")
+        // req.getPatemeter("bm_content")
+        Map<String, Object> pMap = new HashMap<>();
+        HashMapBinder       hmb  = new HashMapBinder( req );
         hmb.bind( pMap );
         result = board3Logic.boardInsert( pMap );
-        String path = "";
         log.info( result );
         
         if ( result == 1 ) {
@@ -92,23 +98,39 @@ public class Board3Controller implements Controller3 {
     
     @Override
     public Object boardUpdate( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
-        int result = 0;
+        log.info( "boardUpdate호출" );
+        Map<String, Object> pMap = new HashMap<>();
+        HashMapBinder       hmb  = new HashMapBinder( req );
+        hmb.bind( pMap );
+        log.info( pMap );
+        // result(0인데->1로 바꾸어주는)값의 변화를 주는 코드추가
+        int result = board3Logic.boardMUpdate( pMap );
         
         if ( result == 1 ) {
-            res.sendRedirect( "boardInsertSuccess.jsp" );
-            return null;
+            path = "redirect:/board3/boardList.st3";
         }
-        return "redirect:/board3/boardList.st3";
+        else {
+            path = "boardInsertFail.jsp";
+            res.sendRedirect( path );
+        }
+        return path;
     }
     
     @Override
     public Object boardDelete( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
-        int result = 0;
+        Map<String, Object> pMap = new HashMap<>();
+        HashMapBinder       hmb  = new HashMapBinder( req );
+        hmb.bind( pMap );
+        log.info( pMap );
+        int result = board3Logic.boardMDelete( pMap );
         
         if ( result == 1 ) {
-            res.sendRedirect( "boardInsertSuccess.jsp" );
-            return null;
+            path = "redirect:/board3/boardList.st3";
         }
-        return "redirect:/board3/boardList.st3";
+        else {//result=0인경우 else타게 되므로 
+            path = "redirect:/board/board3/InsertFail.jsp";
+            res.sendRedirect( path );
+        }
+        return path;
     }
 }

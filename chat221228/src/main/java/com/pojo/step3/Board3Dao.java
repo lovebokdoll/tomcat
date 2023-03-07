@@ -13,6 +13,32 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class Board3Dao {
     MyBatisCommonFactory mcf = new MyBatisCommonFactory();
+    public int boardMDelete( Map<String, Object> pMap ) {
+        int result = 0;
+        SqlSessionFactory         sqlSessionFactory = null;
+        SqlSession                sqlSession        = null;
+        try {
+            sqlSessionFactory = mcf.getSqlSessionFactory();
+            sqlSession = sqlSessionFactory.openSession();
+            int bm_no=0;
+            if(pMap.get("bm_no")!=null) {
+                bm_no = Integer.parseInt(pMap.get("bm_no").toString());
+            }else {
+                log.info("pMap.get(\"bm_no\") = null");
+            }
+            result = sqlSession.update("boardMDelete", bm_no );
+            
+            if ( result == 1 ) {
+                sqlSession.commit();
+            }
+            log.info( result );
+        }
+        catch ( Exception e ) {
+            e.printStackTrace();
+        }
+        return result;
+        
+    }
     
     public List<Map<String, Object>> boardList( Map<String, Object> pMap ) {
         log.info( "boardList호출" );
@@ -60,8 +86,8 @@ public class Board3Dao {
     public int getBGroup() {
         int result = 0;
         log.info( "getBGroup호출" );
-        SqlSessionFactory         sqlSessionFactory = null;
-        SqlSession                sqlSession        = null;
+        SqlSessionFactory sqlSessionFactory = null;
+        SqlSession        sqlSession        = null;
         
         try {
             sqlSessionFactory = mcf.getSqlSessionFactory();
@@ -87,7 +113,7 @@ public class Board3Dao {
             sqlSession = sqlSessionFactory.openSession();
             result = sqlSession.selectOne( "getBNo", "" );
             log.info( result );// 채번한 글번호
-        } 
+        }
         catch ( Exception e ) {
             e.printStackTrace();
         }
@@ -114,5 +140,26 @@ public class Board3Dao {
         catch ( Exception e ) {
             e.printStackTrace();
         }
+    }
+    
+    public int boardMUpdate( Map<String, Object> pMap ) {
+        int result = 0;
+        SqlSessionFactory         sqlSessionFactory = null;
+        SqlSession                sqlSession        = null;
+        try {
+            sqlSessionFactory = mcf.getSqlSessionFactory();
+            sqlSession = sqlSessionFactory.openSession();
+            result = sqlSession.update( "boardMUpdate", pMap );
+            
+            if ( result == 1 ) {
+                sqlSession.commit();
+            }
+            log.info( result );
+        }
+        catch ( Exception e ) {
+            e.printStackTrace();
+        }
+        return result;
+        
     }
 }
