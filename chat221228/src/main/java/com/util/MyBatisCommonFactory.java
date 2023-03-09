@@ -27,6 +27,7 @@ public class MyBatisCommonFactory {
 			System.out.println("resource");
 			Reader reader = Resources.getResourceAsReader(resource);
 			logger.info("before sqlSessionFactory : " + sqlSessionFactory);
+			//싱글톤패턴에서 객체 생성하기
 			if (sqlSessionFactory == null) {
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader, "development");
 			}
@@ -39,7 +40,6 @@ public class MyBatisCommonFactory {
 	}// end of init
 
 	public SqlSessionFactory getSqlSessionFactory() {
-		System.out.println("11");
 		init();
 		return sqlSessionFactory;
 	}

@@ -9,7 +9,7 @@
 	<select id="boardList" parameterType="java.util.HashMap"
 		resultType="map">
 		SELECT
-		bm.bm_no,bm.bm_title,bm.bm_writer,bs.bs_file,bm.bm_content
+		bm.bm_no,bm.bm_title,bm.bm_writer,NVL(bs.bs_file,' ')bs_file,bm.bm_content
 		,bm.bm_hit,bm.bm_group,bm.bm_pos,bm.bm_step,bm.bm_reg,bm.bm_pw
 		FROM
 		board_master_t bm,
@@ -45,14 +45,14 @@
 		,
 		bm_hit,bm_pw,bm_group,bm_pos,bm_step)
 		VALUES(#{bm_no},#{bm_title},#{bm_writer},#{bm_content},TO_CHAR
-		(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')s
 		,0,#{bm_pw},#{bm_group},#{bm_pos},#{bm_step})
 	</insert>
 
 	<!-- 첨부파일을 추가하는 경우에만 실행된다 없으면 해당 없음 글번호는 새글쓰기에서 결정된 값이 대입외어야 함, 새로 채번XXXXX -->
 	<insert id="boardSInsert" parameterType="map">
 		INSERT INTO
-		board_sub_t(bm_no,bs_sep,bs_file,bs_size)
+		board_sub_t(bm_no,bs_seq,bs_file,bs_size)
 		VALUES(#{bm_no},1,#{bs_file},#{bs_size})
 	</insert>
 	<!-- 내가 쓰는 댓글 뒤에 댓글이 존재하는 경우만 실행 조건절에 들어오는 그룹번호와 step은 상세보기 화면에서 가져온 값이 
@@ -73,6 +73,7 @@
 		WHERE BM_NO =
 		#{bm_no}
 	</update>
+	
 	<update id="bStepUpdate" parameterType="map">
 		UPDATE board_master_t
 		SET
@@ -80,6 +81,13 @@
 		WHERE bm_group =#{bm_group}
 		AND bm_step
 		>#{bm_step}
+	</update>
+	
+	<update id="hitCount" parameterType="int">
+		UPDATE board_master_t
+		SET
+		bm_hit = bm_hit+1
+		WHERE bm_no=#{value}
 	</update>
 
 	<select id="getBGroup" parameterType="string" resultType="int">

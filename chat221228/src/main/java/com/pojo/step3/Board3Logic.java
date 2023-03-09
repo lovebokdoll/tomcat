@@ -3,6 +3,7 @@ package com.pojo.step3;
 import java.util.List;
 import java.util.Map;
 
+import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -12,6 +13,14 @@ public class Board3Logic {
     public List<Map<String, Object>> boardList( Map<String, Object> pMap ) {
         log.info( "boardList호출" );
         List<Map<String, Object>> boardList = board3Dao.boardList( pMap );
+        return boardList;
+    }
+    
+    public List<Map<String, Object>> boardDetail( Map<String, Object> pMap ) {
+        log.info( "boardDetail호출" );
+        List<Map<String, Object>> boardList = board3Dao.boardList( pMap );
+        int bm_no = Integer.parseInt( pMap.get( "bm_no").toString() );
+        board3Dao.hitCount(bm_no);
         return boardList;
     }
     
@@ -43,10 +52,18 @@ public class Board3Logic {
             pMap.put( "bm_step", 0 );
         }
         result = board3Dao.boardInsert( pMap );
+        //첨부파일이 존재하니?
+        if(pMap.get("bs_file")!=null &&pMap.get( "bs_file" ).toString().length()>1) {
+            pMap.put("bm_no",bm_no);
+            //현재 첨부파일은 하나만 담는 것으로 가정하고 처리함
+            pMap.put("bs_seq",1);
+            int result2=0;
+            result2=board3Dao.boardSInsert( pMap );
+            log.info(result2);
+        }
         return result;
     }
-    
-    public int boardMUpdate( Map<String, Object> pMap ) {
+      public int boardMUpdate( Map<String, Object> pMap ) {
         int result = board3Dao.boardMUpdate( pMap );
         
         return result;

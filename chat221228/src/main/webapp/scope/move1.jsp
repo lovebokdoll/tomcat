@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.book.scope.Sonata"%>
 <%
-Sonata             myCar   = ( Sonata ) request.getAttribute( "myCar" );
+/* Sonata             myCar   = ( Sonata ) request.getAttribute( "myCar" );
 Sonata             herCar  = ( Sonata ) request.getAttribute( "herCar" );
 Sonata             yourCar = ( Sonata ) session.getAttribute( "yourCar" );
 
@@ -16,5 +16,5 @@ out.print( "<hr>" );
 out.print( myCar.carName+","+ ohHerCar.carName +","+ ohMyCar.indexOf( 3 )+"소나타".concat("1"));
 out.print( "<hr>" );
 out.print( myCar.carName+","+ ohYourCar.carName +","+ ohMyCar.charAt( 2 )+true.concat("1")+new Boolean(true).toString());
-out.print( "<hr>" );
+out.print( "<hr>" ); */
 %>

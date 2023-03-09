@@ -23,7 +23,6 @@ public class ActionServlet extends HttpServlet {
         log.info( uri );
         String context = req.getContextPath();
         log.info( context );
-        
         String command = uri.substring( context.length() + 1 );
         log.info( command );
         int end = command.lastIndexOf( "." );

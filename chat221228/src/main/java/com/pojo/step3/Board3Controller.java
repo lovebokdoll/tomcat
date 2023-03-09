@@ -56,7 +56,7 @@ public class Board3Controller implements Controller3 {
         Map<String, Object> pMap = new HashMap<>();
         HashMapBinder       hmb  = new HashMapBinder( req );
         hmb.bind( pMap );
-        bList = board3Logic.boardList( pMap );
+        bList = board3Logic.boardDetail( pMap );
         log.info( "bList" );
         req.setAttribute( "bList", bList );
         return "forward:board3/boardDetail";
@@ -81,8 +81,10 @@ public class Board3Controller implements Controller3 {
         // req.getPatemeter("bm_title")
         // req.getPatemeter("bm_content")
         Map<String, Object> pMap = new HashMap<>();
+        log.info( "before :" +pMap );
         HashMapBinder       hmb  = new HashMapBinder( req );
-        hmb.bind( pMap );
+        hmb.multiBind( pMap );
+        log.info( "after :" +pMap );
         result = board3Logic.boardInsert( pMap );
         log.info( result );
         

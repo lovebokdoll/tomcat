@@ -249,8 +249,8 @@ out.print(size);
 		<div id="dlg_boardIns" footer="#tb_boardIns" class="easyui-dialog"
 			title="글쓰기" data-options="modal:true,closed:true"
 			style="width: 600px; height: 400px; padding: 10px">
-			<!--     <form id="f_boardIns" method="post" enctype="multipart/form-data" action="./boardInsert.st3"> -->
-			<form id="f_boardIns" method="get" action="./boardInsert.st3">
+			   <form id="f_boardIns" method="post" enctype="multipart/form-data" action="./boardInsert.st3">
+			<!--  <form id="f_boardIns" method="get" action="./boardInsert.st3"> -->
 				<!-- hidden 속성은 화면에 보이지 않는다. 개발자가 필요로 하는 값이다.
         등록 부분과 수정 부분이 동시에 발생할 수도 있다. 트랜잭션 처리가 필요하다. 
         트랜잭션 처리가 필요한 경우 메서드 설계 -->

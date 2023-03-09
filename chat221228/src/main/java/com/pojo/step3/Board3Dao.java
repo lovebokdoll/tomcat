@@ -13,20 +13,24 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class Board3Dao {
     MyBatisCommonFactory mcf = new MyBatisCommonFactory();
+    
     public int boardMDelete( Map<String, Object> pMap ) {
-        int result = 0;
-        SqlSessionFactory         sqlSessionFactory = null;
-        SqlSession                sqlSession        = null;
+        int               result            = 0;
+        SqlSessionFactory sqlSessionFactory = null;
+        SqlSession        sqlSession        = null;
+        
         try {
             sqlSessionFactory = mcf.getSqlSessionFactory();
             sqlSession = sqlSessionFactory.openSession();
-            int bm_no=0;
-            if(pMap.get("bm_no")!=null) {
-                bm_no = Integer.parseInt(pMap.get("bm_no").toString());
-            }else {
-                log.info("pMap.get(\"bm_no\") = null");
+            int bm_no = 0;
+            
+            if ( pMap.get( "bm_no" ) != null ) {
+                bm_no = Integer.parseInt( pMap.get( "bm_no" ).toString() );
             }
-            result = sqlSession.update("boardMDelete", bm_no );
+            else {
+                log.info( "pMap.get(\"bm_no\") = null" );
+            }
+            result = sqlSession.update( "boardMDelete", bm_no );
             
             if ( result == 1 ) {
                 sqlSession.commit();
@@ -143,9 +147,10 @@ public class Board3Dao {
     }
     
     public int boardMUpdate( Map<String, Object> pMap ) {
-        int result = 0;
-        SqlSessionFactory         sqlSessionFactory = null;
-        SqlSession                sqlSession        = null;
+        int               result            = 0;
+        SqlSessionFactory sqlSessionFactory = null;
+        SqlSession        sqlSession        = null;
+        
         try {
             sqlSessionFactory = mcf.getSqlSessionFactory();
             sqlSession = sqlSessionFactory.openSession();
@@ -161,5 +166,55 @@ public class Board3Dao {
         }
         return result;
         
+    }
+    
+    /**************************************
+     * 글 조회수 수정하기
+     * @param int - 글 번호 가져오기
+     **************************************/
+    public int hitCount( int bm_no ) {
+        int               result            = 0;
+        SqlSessionFactory sqlSessionFactory = null;
+        SqlSession        sqlSession        = null;
+        
+        try {
+            sqlSessionFactory = mcf.getSqlSessionFactory();
+            sqlSession = sqlSessionFactory.openSession();
+            result = sqlSession.update( "hitCount", bm_no );
+            if ( result == 1 ) {
+                sqlSession.commit();
+            }
+            log.info( result );
+        }
+        catch ( Exception e ) {
+            e.printStackTrace();
+        }
+        return result;
+        
+    }
+    
+    public int boardSInsert( Map<String, Object> pMap ) {
+        log.info( "boardInsert호출" );
+        int               result            = 0;
+        SqlSessionFactory sqlSessionFactory = null;
+        SqlSession        sqlSession        = null;
+        
+        // insert이지만 update로 하는 이유는 리턴타입이 object이기 때문이다
+        // 메소드 이름은 상관없이 해당 쿼리문은 id로 찾기 때문이다.
+        try {
+            sqlSessionFactory = mcf.getSqlSessionFactory();
+            sqlSession = sqlSessionFactory.openSession();
+            result = sqlSession.update( "boardSInsert", pMap );
+            
+            if ( result == 1 ) {
+                
+                sqlSession.commit();
+            }
+            log.info( result );
+        }
+        catch ( Exception e ) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
