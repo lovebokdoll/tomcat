@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Bottom from "../include/Bottom";
 import Header from "../include/Header";
-const EmpPage = ({ authLogic }) => {
+import Workout from "../workout/Workout";
+const WorkoutPage = ({ authLogic }) => {
   const navigate = useNavigate();
   const onLogout = () => {
     authLogic.logout();
@@ -17,9 +18,10 @@ const EmpPage = ({ authLogic }) => {
   return (
     <>
       <Header onLogout={onLogout}/>
-      <div>관리관리관리</div>
+      <Workout/>
       <Bottom />
     </>
   );
 };
-export default EmpPage;
+
+export default WorkoutPage;

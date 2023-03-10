@@ -39,7 +39,7 @@ if (boardList != null) {
 		tb_value = $("#tb_search").val();//사용자가 입력한 조건 검색 문자열
 		console.log("콤보박스 값: " + cb_value + ", 사용자가 입력한 키워드: " + tb_value);
 		location.href = "./boardList.st3?cb_search=" + cb_value + "&tb_search="
-				+ tb_value + "&b_date=" + v_date;
+				+ tb_value + "&bm_reg=" + v_date;
 	}
 	function boardDetail(bm_no) {
 		//alert(bm_no);

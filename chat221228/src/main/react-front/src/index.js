@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import AuthLogic from "./service/authLogic";
 import firebaseApp from "./service/firebase";
+import "@fortawesome/fontawesome-free/js/all.js";
+import SampleApp from "./SampleApp";
+import App from "./App";
 //공통코드 ->service->authLogic.js ->import외부 js사용가능함
 //브라우저에서 import하려면 반드시 babel필요함
 const authLogic = new AuthLogic(firebaseApp); //인스턴스화(파라미터가 올 수 있다.)

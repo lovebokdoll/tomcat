@@ -45,6 +45,8 @@ public class ActionSupport extends HttpServlet {
                 if (((String) obj).contains(":")) {
                     log.info(":포함되어있어유");
                     pageMove = obj.toString().split(":");
+                    // pageMove[0] = forward
+                   //  pageMove[1] = board3/boardDetail
                 } else {
                     log.info(": 포함되어있지 않아유");
                     pageMove = obj.toString().split("/");

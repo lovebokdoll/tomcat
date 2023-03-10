@@ -10,6 +10,7 @@ import {
   onValue,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 import DeptRow from "../../dept/DeptRow";
+import { useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FS_APIKEY,
@@ -25,7 +26,18 @@ const app = initializeApp(firebaseConfig);
 console.log(app);
 const database = getDatabase();
 
-const FireDeptPage = () => {
+const FireDeptPage = ({ authLogic }) => {
+  const navigate = useNavigate();
+  const onLogout = () => {
+    authLogic.logout();
+  };
+  useEffect(() => {
+    authLogic.onAuthChange((user) => {
+      if (!user) {
+        navigate("/");
+      }
+    });
+  });
   const [depts, setDepts] = useState([
     { deptno: 10, dname: "개발1팀", loc: "부산" },
     { deptno: 20, dname: "개발2팀", loc: "서울" },

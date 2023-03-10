@@ -3,7 +3,18 @@ import Table from "react-bootstrap/Table";
 import Bottom from "../include/Bottom";
 import Header from "../include/Header";
 
-const DeptPage = () => {
+const DeptPage = ({ authLogic }) => {
+  const navigate = useNavigate();
+  const onLogout = () => {
+    authLogic.logout();
+  };
+  useEffect(() => {
+    authLogic.onAuthChange((user) => {
+      if (!user) {
+        navigate("/");
+      }
+    });
+  });
   const [depts, setDepts] = useState([
     { deptno: 10, dname: "개발1팀", loc: "부산" },
     { deptno: 20, dname: "개발2팀", loc: "서울" },
@@ -15,7 +26,7 @@ const DeptPage = () => {
   }, []); //옵션에 별도의 값을 지정하지 않으면 최조 한번만 실행됨
   return (
     <>
-      <Header />
+      <Header onLogout={onLogout}/>
       <div>부서관리 페이지</div>
       <div className="dept-list">
         <Table striped bordered hover>

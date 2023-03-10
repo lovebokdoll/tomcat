@@ -19,6 +19,7 @@ public class Board3Logic {
     public List<Map<String, Object>> boardDetail( Map<String, Object> pMap ) {
         log.info( "boardDetail호출" );
         List<Map<String, Object>> boardList = board3Dao.boardList( pMap );
+        
         int bm_no = Integer.parseInt( pMap.get( "bm_no").toString() );
         board3Dao.hitCount(bm_no);
         return boardList;
