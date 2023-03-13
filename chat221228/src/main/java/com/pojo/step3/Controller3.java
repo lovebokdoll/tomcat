@@ -14,6 +14,11 @@ public interface Controller3 {
     
     public Object boardList( HttpServletRequest req, HttpServletResponse res );
     
+    public Object imageUpload( HttpServletRequest req, HttpServletResponse res );
+    
+    public Object imageGet( HttpServletRequest req, HttpServletResponse res );
+    
+    
     public Object boardDetail( HttpServletRequest req, HttpServletResponse res );
     
     public Object boardInsert( HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException;

@@ -17,7 +17,7 @@ public class ViewResolver {
     
     public ViewResolver( HttpServletResponse res, HttpServletRequest req, String[] pageMove ) throws ServletException, IOException {
         String path = pageMove[1];
-        
+ 
         // webapp를 바라본다
         if ( "redirect".equals( pageMove[0] ) ) {
             res.sendRedirect( path );

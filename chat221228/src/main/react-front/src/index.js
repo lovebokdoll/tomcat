@@ -4,6 +4,7 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import AuthLogic from "./service/authLogic";
 import firebaseApp from "./service/firebase";
+import "react-quill/dist/quill.snow.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 import SampleApp from "./SampleApp";
 import App from "./App";

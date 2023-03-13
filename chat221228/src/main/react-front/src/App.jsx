@@ -11,6 +11,8 @@ import WorkoutPage from "./components/page/WorkoutPage";
 import HackerNewsPage from "./components/page/HackerNewsPage";
 import YoutubePage from "./components/page/YoutubePage";
 import { useEffect, useState } from "react";
+import BoardDetail from "./components/board/BoardDetail";
+import BoardWriteForm from "./components/board/BoardWriteForm";
 //index.js에서 브라우저 라우터로 감싸진 App태그 속성값으로 넘어온 주소번지를 받는다
 const App = ({ authLogic }) => {
   //{authLogic}는 props자리
@@ -73,6 +75,12 @@ const App = ({ authLogic }) => {
           path="/board"
           exact={true}
           element={<BoardPage authLogic={authLogic} />}
+        />
+        <Route path="/board/write/*" element={<BoardWriteForm />} />
+        <Route
+          path="/boarddetail/:bm_no"
+          exact={true}
+          element={<BoardDetail />}
         />
         <Route
           path="/workout"

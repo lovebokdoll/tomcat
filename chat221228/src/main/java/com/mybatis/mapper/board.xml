@@ -41,11 +41,10 @@
 		read.jsp에서 가진 값에 각각 1을 더한 값으로 결정된다 -->
 	<insert id="boardMInsert" parameterType="map">
 		INSERT INTO
-		board_master_t(bm_no,bm_title,bm_writer,bm_content, bm_reg
-		,
+		board_master_t(bm_no,bm_title,bm_writer,bm_content, bm_reg,
 		bm_hit,bm_pw,bm_group,bm_pos,bm_step)
 		VALUES(#{bm_no},#{bm_title},#{bm_writer},#{bm_content},TO_CHAR
-		(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')s
+		(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
 		,0,#{bm_pw},#{bm_group},#{bm_pos},#{bm_step})
 	</insert>
 

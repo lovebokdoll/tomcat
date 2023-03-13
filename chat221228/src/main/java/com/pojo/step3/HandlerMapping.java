@@ -57,7 +57,7 @@ public class HandlerMapping {
                     return ( String ) obj;
                 }
             }
-            else if ( "boardDetail".equals( upmu[1] ) ) { 
+            else if ( "boardDetail".equals( upmu[1] ) ) {
                 obj = controller3.boardDetail( req, res );
                 
                 // 리턴타입이 ModelAndView인 경우
@@ -71,10 +71,24 @@ public class HandlerMapping {
             }
             else if ( "boardInsert".equals( upmu[1] ) ) { // 글입력 - 새글쓰기와 댓글쓰기
                 obj = controller3.boardInsert( req, res );
-                
-//                if ( obj instanceof String ) {
-//                    return ( String ) obj;
-//                }
+                log.info("boardInsert호출 => boolean" + obj instanceof String);
+                if ( obj instanceof String ) {
+                    return ( String ) obj;
+                }
+            }
+            else if ( "imageUpload".equals( upmu[1] ) ) { // 리액트 quill editor 이미지 추가
+                obj = controller3.imageUpload( req, res );
+                log.info("imageUpload호출 => boolean" + obj instanceof String);
+                if ( obj instanceof String ) {
+                    return ( String ) obj;
+                }
+            }
+            else if ( "imageGet".equals( upmu[1] ) ) { // 리액트 quill editor 이미지 추가
+                obj = controller3.imageGet( req, res );
+                log.info("imageGet호출 => boolean" + obj instanceof String);
+                if ( obj instanceof String ) {
+                    return ( String ) obj;
+                }
             }
             else if ( "boardUpdate".equals( upmu[1] ) ) { // 글수정 - 첨부파일 수정 유무 고려하기
                 obj = controller3.boardUpdate( req, res );

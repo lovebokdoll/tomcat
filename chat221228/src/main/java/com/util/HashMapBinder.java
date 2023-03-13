@@ -81,7 +81,7 @@ public class HashMapBinder {
               // 첨부파일의 크기를 담을 수 있는 변수 선언
             double size = 0;
             
-            if ( files != null ) {
+            if ( file != null ) {
                 size = file.length();// 파일 크기를 byte단위로 담음
                 size = size / 1024.0;// byte->kbyte
                 pMap.put( "bs_size", size );
