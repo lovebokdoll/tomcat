@@ -12,13 +12,14 @@
 	<!-- Exam exam = new NewlecExam(); -->
 	<!-- 접두사를 이용한 tag는 두가지 의미를 가진다. 1.tag가 특정한 처리기에 의해 처리될 수 있도록 그 처리기를 특정짓기위해 
 		사용 2.tag의 이름을 식별하기 위해서 사용 <홍길동:bean><홍길동/bean> <김길동:bean><김길동/bean> -->
-	<bean id="exam" class="spring.di.entity.NewlecExam" p:kor="10"
-		p:eng="10" />
+	<!--  class="spring.di.entity.NewlecExam" 어떠한 객체를 생성할 것인지 
+			id="exam" 그 객체를 어떠한 이름으로 사용할 것인지 변수명 작성-->
+	<bean id="exam" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10" /> 
 	<!-- <bean id="exam" class="spring.di.entity.NewlecExam"> <constructor-arg 
 		name="kor" value="10" /> <constructor-arg name="eng" value="20" /> <constructor-arg 
 		name="com" value="40" /> <constructor-arg name="math" value="30" /> </bean> -->
 	<!-- ExamConsole console = new InlineExamConsole(exam); -->
-	<bean id="console" class="spring.di.ui.InlineExamConsole">
+	<bean id = "console" class ="spring.di.ui.InlineExamConsole">
 		<!-- console.setExam(exam); -->
 		<!-- <property name="exam" ref="exam"/> -->
 

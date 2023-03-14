@@ -21,9 +21,8 @@ public class Program {
          * Exam exam = new NewlecExam(10,10,10,10); //생성자를 통해서 값을 설정함
          * ExamConsole console = new InlineExamConsole(exam);
          * // 데이터를 받아와야함 - 생성자 톰캣
-         * //InlineExamConsole 이 exam를 직접 조립하고 있다.
+         * //InlineExamConsole 이 exam를 직접 조립하고 있다. =>DI
          * //조립되는 곳에 따라서 출력되는 방식이 다르다.
-         * console.setExam(exam);
          */
         
         ApplicationContext context = new ClassPathXmlApplicationContext( "spring/di/setting.xml" );

@@ -71,14 +71,15 @@ public class ActionSupport extends HttpServlet {
                 pageMove[1] = modelAndView.getViewName();
                 log.info( "pageMove[0] = {} , pageMove[1] = {}", pageMove[0], pageMove[1] );
             }
-            log.info("Object가 String일때와 MAV일때가 끝난 지점");
-      
-             if ( pageMove != null && pageMove.length == 2 ) {
+            log.info( "Object가 String일때와 MAV일때가 끝난 지점" );
+            
+            if ( pageMove != null && pageMove.length == 2 ) {
                 new ViewResolver( res, req, pageMove );
-            }else if(pageMove != null && pageMove.length == 1) {
+            }
+            else if ( pageMove != null && pageMove.length == 1 ) {
                 res.setContentType( "text/plain;charset=UTF-8" );
                 PrintWriter out = res.getWriter();
-                out.print(pageMove[0]);
+                out.print( pageMove[0] );
             }
         }
     }

@@ -16,7 +16,7 @@ out.print(size);
 <html>
 <head>
 <!-- <meta charset="UTF-8"> 이것때문에 한글깨짐.-->
-<title>[web-app]MVC기반의 계층형 게시판 구현하기</title>
+<title>[WEB-APP]MVC기반의 계층형 게시판 구현하기</title>
 <%@ include file="../common/easyUI_common.jsp"%>
 <script type="text/javascript">
 	let g_no = 0;//그리드에서 선택이 바뀔때 마다 변경된 값이 저장됨.

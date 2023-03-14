@@ -29,7 +29,23 @@ public class HandlerMapping {
         Object       obj          = null;
         ModelAndView modelAndView = null;
         
-        if ( "board3".equals( upmu[0] ) ) {
+        if ( "common".equals( upmu[0] ) ) {
+            controller3 = new CommonController();
+            
+            if ( "zipcodeList".equals( upmu[1] ) ) { // html화면으로 출력 -text/html
+                obj = controller3.zipcodeList( req, res );
+                
+                // 리턴타입이 ModelAndView인 경우
+                if ( obj instanceof ModelAndView ) {
+                    return ( ModelAndView ) obj;
+                }
+                // 리턴타입이 String인 경우
+                else if ( obj instanceof String ) {
+                    return ( String ) obj;
+                }
+            } ///end of zipcodeList
+        }
+        else if ( "board3".equals( upmu[0] ) ) {
             controller3 = new Board3Controller();
             
             // 게시글 전체목록
@@ -71,38 +87,31 @@ public class HandlerMapping {
             }
             else if ( "boardInsert".equals( upmu[1] ) ) { // 글입력 - 새글쓰기와 댓글쓰기
                 obj = controller3.boardInsert( req, res );
-                log.info("boardInsert호출 => boolean" + obj instanceof String);
-                if ( obj instanceof String ) {
-                    return ( String ) obj;
-                }
+                log.info( "boardInsert호출 => boolean" + obj instanceof String );
+                
             }
             else if ( "imageUpload".equals( upmu[1] ) ) { // 리액트 quill editor 이미지 추가
                 obj = controller3.imageUpload( req, res );
-                log.info("imageUpload호출 => boolean" + obj instanceof String);
-                if ( obj instanceof String ) {
-                    return ( String ) obj;
-                }
+                log.info( "imageUpload호출 => boolean" + obj instanceof String );
+                
+            }
+            else if ( "imageDownload".equals( upmu[1] ) ) { // 리액트 quill editor 이미지 추가
+                obj = controller3.imageDownload( req, res );
+                log.info( "imageDownload호출 => boolean" + obj instanceof String );
+                
             }
             else if ( "imageGet".equals( upmu[1] ) ) { // 리액트 quill editor 이미지 추가
                 obj = controller3.imageGet( req, res );
-                log.info("imageGet호출 => boolean" + obj instanceof String);
-                if ( obj instanceof String ) {
-                    return ( String ) obj;
-                }
+                log.info( "imageGet호출 => boolean" + obj instanceof String );
+                
             }
             else if ( "boardUpdate".equals( upmu[1] ) ) { // 글수정 - 첨부파일 수정 유무 고려하기
                 obj = controller3.boardUpdate( req, res );
                 
-                if ( obj instanceof String ) {
-                    return ( String ) obj;
-                }
             }
             else if ( "boardDelete".equals( upmu[1] ) ) { // 글입력 - 첨부파일 삭제유무 고려하기
                 obj = controller3.boardDelete( req, res );
                 
-                if ( obj instanceof String ) {
-                    return ( String ) obj;
-                }
             }// end of 게시판구현
             
             // 인증관리 - 이순신
